@@ -14,6 +14,39 @@ fn main() {
             return;
         }
     };
+    let number_sign = sign(number);
+    let number_parity = parity(number);
+    let result = square(number);
 
-    println!("{number} sayısının karesi: {}", number * number);
+    println!("{}", number);
+    println!("Sayı {number_sign}");
+    println!("Sayı {number_parity}");
+    println!("{number}'in karesi: {result}");
+
+}
+
+fn square(number: i32) -> i32 {
+    return number * number;
+}
+
+fn sign(number: i32) -> &'static str {
+    let no_sign = if number > 0 {
+        "pozitiftir"
+    } else if number < 0 {
+        "negatiftir"
+    } else {
+        "sıfırdır"
+    };
+    return no_sign;
+}
+
+fn parity(number: i32) -> &'static str {
+
+    let no_parity = if number % 2 == 0 {
+        "çifttir"
+    } else {
+        "tektir"
+    };
+    return no_parity;
+
 }
