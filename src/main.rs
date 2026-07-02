@@ -1,4 +1,5 @@
 use std::io;
+use std::num::ParseIntError;
 
 fn main() {
     println!("Bir tam Sayı giriniz:");
@@ -7,13 +8,14 @@ fn main() {
 
     io::stdin().read_line(&mut input).expect("Girdi okunamadı");
 
-    let number: i32 = match input.trim().parse() {
+    let number = match parse_number(&input) {
         Ok(value) => value,
         Err(_) => {
             eprintln!("Geçerli bir tam sayı girmediniz.");
             return;
         }
     };
+
     let number_sign = sign(number);
     let number_parity = parity(number);
     let result = square(number);
@@ -22,7 +24,9 @@ fn main() {
     println!("Sayı {number_sign}");
     println!("Sayı {number_parity}");
     println!("{number}'in karesi: {result}");
-
+}
+fn parse_number(text: &str) -> Result<i32, ParseIntError> {
+    text.trim().parse()
 }
 
 fn square(number: i32) -> i32 {
@@ -41,12 +45,10 @@ fn sign(number: i32) -> &'static str {
 }
 
 fn parity(number: i32) -> &'static str {
-
     let no_parity = if number % 2 == 0 {
         "çifttir"
     } else {
         "tektir"
     };
     return no_parity;
-
 }
